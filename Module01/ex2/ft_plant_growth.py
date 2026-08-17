@@ -9,7 +9,7 @@ class Plant:
         print(f"{self.name}: {self.cm}cm, {self.days} days old")
 
     def grow(self) -> None:
-        self.cm = round(self.cm + 0.8, 1)
+        self.cm = round(self.cm + (self.cm / self.days), 1)
 
     def age(self) -> None:
         self.days += 1
