@@ -4,6 +4,7 @@ def ft_count_harvest_recursive():
     count = 0
     ft_call_harvest_recursive(day, count)
 
+
 def ft_call_harvest_recursive(day, count):
     if count < day:
         count += 1
