@@ -20,4 +20,5 @@ def test_temperature() -> None:
     print()
     print("All tests completed - program didn't crash!")
 
+
 test_temperature()
