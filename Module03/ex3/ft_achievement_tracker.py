@@ -1,9 +1,42 @@
-from random import sample, randint
+import random
+
+ALL_ACHIEVEMENTS: list[str] = [
+    "First Steps",
+    "Boss Slayer",
+    "Master Explorer",
+    "Collector Supreme",
+    "Treasure Hunter",
+    "Strategist",
+    "Untouchable",
+    "Speed Runner",
+    "Hidden Path Finder",
+    "Crafting Genius",
+    "World Savior",
+    "Survivor",
+    "Unstoppable",
+    "Sharp Mind",
+    "Dragon Tamer",
+    "Night Owl",
+    "Lucky Strike",
+    "Iron Will",
+    "Silent Hunter",
+    "Perfect Aim",
+    "Deep Diver",
+    "Sky Walker",
+    "Time Bender",
+    "Ghost Whisperer",
+    "Legendary Smith",
+    "Chest Cracker",
+    "Combo Master",
+    "Pacifist",
+    "Marathoner",
+    "Quest Finisher",
+]
 
 
-def gen_player_achievements(achievements: list[str]) -> set[str]:
-    amount = randint(4, len(achievements))
-    return set(sample(achievements, amount))
+def gen_player_achievements() -> set[str]:
+    amount = random.randint(8, 22)
+    return set(random.sample(ALL_ACHIEVEMENTS, amount))
 
 
 def elements_common(*players: set[str]) -> set[str]:
@@ -11,36 +44,25 @@ def elements_common(*players: set[str]) -> set[str]:
 
 
 if __name__ == "__main__":
+    alice = gen_player_achievements()
+    bob = gen_player_achievements()
+    charlie = gen_player_achievements()
+    dylan = gen_player_achievements()
 
-    achievements = [
-        "First Steps",
-        "Boss Slayer",
-        "Master Explorer",
-        "Collector Supreme",
-        "Treasure Hunter",
-        "Strategist",
-        "Untouchable",
-        "Speed Runner",
-        "Hidden Path Finder"
-    ]
+    everything = set(ALL_ACHIEVEMENTS)
 
-    alice = gen_player_achievements(achievements)
-    bob = gen_player_achievements(achievements)
-    charlie = gen_player_achievements(achievements)
-    dylan = gen_player_achievements(achievements)
-
-    all_distinct = set.union(alice, bob, charlie, dylan)
+    all_distinct = alice.union(bob, charlie, dylan)
     common = elements_common(alice, bob, charlie, dylan)
 
-    only_alice = alice.difference(set.union(bob, charlie, dylan))
-    only_bob = bob.difference(set.union(alice, charlie, dylan))
-    only_charlie = charlie.difference(set.union(alice, bob, dylan))
-    only_dylan = dylan.difference(set.union(alice, bob, charlie))
+    only_alice = alice.difference(bob, charlie, dylan)
+    only_bob = bob.difference(alice, charlie, dylan)
+    only_charlie = charlie.difference(alice, bob, dylan)
+    only_dylan = dylan.difference(alice, bob, charlie)
 
-    missing_alice = all_distinct.difference(alice)
-    missing_bob = all_distinct.difference(bob)
-    missing_charlie = all_distinct.difference(charlie)
-    missing_dylan = all_distinct.difference(dylan)
+    missing_alice = everything.difference(alice)
+    missing_bob = everything.difference(bob)
+    missing_charlie = everything.difference(charlie)
+    missing_dylan = everything.difference(dylan)
 
     print("=== Achievement Tracker System ===\n")
 
@@ -49,7 +71,7 @@ if __name__ == "__main__":
     print(f"Player Charlie: {charlie}")
     print(f"Player Dylan: {dylan}\n")
 
-    print(f"All distinct achievements: {all_distinct}")
+    print(f"All distinct achievements: {all_distinct}\n")
     print(f"Common achievements: {common}\n")
 
     print(f"Only Alice has: {only_alice}")

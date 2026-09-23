@@ -1,6 +1,6 @@
-import sys
 import os
 import site
+import sys
 
 
 def is_in_venv() -> bool:
@@ -13,7 +13,14 @@ def get_venv_name() -> str:
 
 
 def get_site_packages_path() -> str:
-    paths = site.getsitepackages()
+    try:
+        paths = site.getsitepackages()
+    except AttributeError:  # very old virtualenv tool: no such function
+        return "unknown"
+    # On Windows the first entry is the prefix itself, not site-packages.
+    for path in paths:
+        if path.endswith("site-packages"):
+            return path
     return paths[0] if paths else "unknown"
 
 
@@ -23,6 +30,8 @@ def show_status_outside_venv() -> None:
     print("Virtual Environment: None detected\n")
     print("WARNING: You're in the global environment!")
     print("The machines can see everything you install.\n")
+    print("Global package installation path:")
+    print(f"{get_site_packages_path()}\n")
     print("To enter the construct, run:")
     print("python -m venv matrix_env")
     print("source matrix_env/bin/activate  # On Unix")
@@ -31,18 +40,15 @@ def show_status_outside_venv() -> None:
 
 
 def show_status_inside_venv() -> None:
-    name = get_venv_name()
-    packages_path = get_site_packages_path()
-
     print("MATRIX STATUS: Welcome to the construct\n")
     print(f"Current Python: {sys.executable}")
-    print(f"Virtual Environment: {name}")
+    print(f"Virtual Environment: {get_venv_name()}")
     print(f"Environment Path: {sys.prefix}\n")
     print("SUCCESS: You're in an isolated environment!")
     print("Safe to install packages without affecting")
     print("the global system.\n")
     print("Package installation path:")
-    print(packages_path)
+    print(get_site_packages_path())
 
 
 def main() -> None:

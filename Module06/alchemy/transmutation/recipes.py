@@ -1,6 +1,6 @@
-from alchemy.elements import create_air, create_fire  # absoluto
-
-from ..potions import strength_potion  # relativo (.. = sobe para alchemy)
+from elements import create_fire  # absolute: root elements.py
+from alchemy.potions import strength_potion  # absolute: from the top package
+from ..elements import create_air  # relative: alchemy/elements.py
 
 
 def lead_to_gold() -> str:

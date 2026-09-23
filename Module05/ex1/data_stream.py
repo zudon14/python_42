@@ -14,7 +14,7 @@ class DataProcessor(abc.ABC):
         ...
 
     @abc.abstractmethod
-    def ingest(self, data: Any) -> None:
+    def ingest(self, data: int | float | list[int | float]) -> None:
         ...
 
     def output(self) -> tuple[int, str]:
@@ -41,7 +41,7 @@ class NumericProcessor(DataProcessor):
             )
         )
 
-    def ingest(self, data: Any) -> None:
+    def ingest(self, data: str | list[str]) -> None:
         if isinstance(data, (int, float)):
             self.itens.append(str(data))
 
@@ -67,7 +67,7 @@ class TextProcessor(DataProcessor):
             and all(isinstance(item, str) for item in data)
         )
 
-    def ingest(self, data: Any) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if isinstance(data, str):
             self.itens.append(data)
 

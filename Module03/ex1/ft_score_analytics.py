@@ -1,31 +1,24 @@
 import sys
 
+USAGE = (
+    "No scores provided. "
+    "Usage: python3 ft_score_analytics.py <score1> <score2> ..."
+)
 
-def main():
-    args = sys.argv[1:]
 
+def main() -> None:
     print("=== Player Score Analytics ===")
 
-    if len(sys.argv) < 2:
-        print(
-            f"No scores provided. Usage: python3 {sys.argv[0]} "
-            "<score1> <score2> ..."
-        )
-        return
+    scores: list[int] = []
 
-    scores = []
-
-    for arg in args:
+    for arg in sys.argv[1:]:
         try:
             scores.append(int(arg))
         except ValueError:
             print(f"Invalid parameter: '{arg}'")
 
     if not scores:
-        print(
-            "No scores provided. Usage: python3 "
-            "ft_score_analytics.py <score1> <score2> ..."
-        )
+        print(USAGE)
         return
 
     print(f"Scores processed: {scores}")
@@ -39,4 +32,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

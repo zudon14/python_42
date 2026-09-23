@@ -6,26 +6,20 @@ def get_player_pos() -> tuple[float, float, float]:
         raw = input("Enter new coordinates as floats in format 'x,y,z': ")
 
         parts = raw.split(",")
-
         if len(parts) != 3:
             print("Invalid syntax")
             continue
 
-        values = []
-
-        try:
-            for part in parts:
+        values: list[float] = []
+        for part in parts:
+            try:
                 values.append(float(part.strip()))
-        except ValueError:
-            for part in parts:
-                try:
-                    float(part.strip())
-                except ValueError as err:
-                    print(f"Error on parameter '{part.strip()}': {err}")
-                    break
-            continue
+            except ValueError as err:
+                print(f"Error on parameter '{part.strip()}': {err}")
+                break
 
-        return values[0], values[1], values[2]
+        if len(values) == 3:
+            return (values[0], values[1], values[2])
 
 
 def distance_to_center(position: tuple[float, float, float]) -> float:
@@ -48,14 +42,14 @@ def distance_between(
 
 
 def main() -> None:
-    print("=== Game Coordinate System ===")
+    print("=== Game Coordinate System ===\n")
 
     print("Get a first set of coordinates")
     first = get_player_pos()
 
     print(f"Got a first tuple: {first}")
     print(f"It includes: X={first[0]}, Y={first[1]}, Z={first[2]}")
-    print(f"Distance to center: {round(distance_to_center(first), 4)}")
+    print(f"Distance to center: {round(distance_to_center(first), 4)}\n")
 
     print("Get a second set of coordinates")
     second = get_player_pos()

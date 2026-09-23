@@ -1,11 +1,9 @@
-
-from random import randint
+import random
 
 
 def ft_data_alchemist() -> None:
-    print("=== Game Data Alchemist ===")
+    print("=== Game Data Alchemist ===\n")
 
-    # Lista inicial
     players = [
         "Alice",
         "bob",
@@ -17,32 +15,26 @@ def ft_data_alchemist() -> None:
         "kevin",
         "Liam",
     ]
-
     print(f"Initial list of players: {players}")
 
-    # List comprehension 1: todos capitalizados
+    # List comprehension 1: every name capitalized
     all_capitalized = [name.capitalize() for name in players]
     print(f"New list with all names capitalized: {all_capitalized}")
 
-    # List comprehension 2: apenas os que já eram capitalizados
+    # List comprehension 2: only the names that were already capitalized
     capitalized_only = [name for name in players if name[0].isupper()]
-    print(f"New list of capitalized names only: {capitalized_only}")
+    print(f"New list of capitalized names only: {capitalized_only}\n")
 
-    # Dict comprehension 1: criar dicionário de scores
-    score_dict = {name: randint(0, 1000) for name in all_capitalized}
-    print(f"Score dict: {score_dict}")
+    # Dict comprehension 1: random score for each player
+    scores = {name: random.randint(0, 1000) for name in all_capitalized}
+    print(f"Score dict: {scores}")
 
-    # Média dos scores
-    average = round(sum(score_dict.values()) / len(score_dict), 2)
-    print(f"Score average is {average}")
+    # The comparison uses the exact average; rounding is only for display
+    average = sum(scores.values()) / len(scores)
+    print(f"Score average is {round(average, 2)}")
 
-    # Dict comprehension 2: apenas scores acima da média
-    high_scores = {
-        name: score
-        for name, score in score_dict.items()
-        if score > average
-    }
-
+    # Dict comprehension 2: only the scores above the average
+    high_scores = {k: v for k, v in scores.items() if v > average}
     print(f"High scores: {high_scores}")
 
 

@@ -1,4 +1,5 @@
-from alchemy.elements import create_air, create_earth, create_fire, create_water
+from elements import create_fire, create_water  # absolute: root elements.py
+from .elements import create_air, create_earth  # relative: alchemy/elements.py
 
 
 def healing_potion() -> str:

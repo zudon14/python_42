@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Creature(ABC):
     def __init__(self, name: str, type_: str) -> None:
         self.name = name
@@ -8,7 +9,7 @@ class Creature(ABC):
     @abstractmethod
     def attack(self) -> str:
         """Each specific creature defines its own attack."""
-        raise NotADirectoryError
+        raise NotImplementedError
 
     def describe(self) -> str:
         return f"{self.name} is a {self.type_} type Creature"
@@ -28,6 +29,7 @@ class Pyrodon(Creature):
 
     def attack(self) -> str:
         return f"{self.name} uses Flamethrower!"
+
 
 class Aquabub(Creature):
     def __init__(self) -> None:

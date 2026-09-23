@@ -1,4 +1,3 @@
-
 class Plant:
     def __init__(self, name: str, cm: float, days: int) -> None:
         self.name = name

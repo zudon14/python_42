@@ -14,7 +14,7 @@ class DataProcessor(abc.ABC):
         ...
 
     @abc.abstractmethod
-    def ingest(self, data: Any) -> None:
+    def ingest(self, data: int | float | list[int | float]) -> None:
         ...
 
     def output(self) -> tuple[int, str]:
