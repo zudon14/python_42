@@ -1,4 +1,3 @@
-
 def ft_harvest_total():
     day_1 = int(input("Day 1 harvest: "))
     day_2 = int(input("Day 2 harvest: "))
